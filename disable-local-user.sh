@@ -1,4 +1,4 @@
-#!/bin/bash -xve 
+#!/bin/bash 
 
 ARCHIVE_DIR='/archive'
 
@@ -25,7 +25,7 @@ then
 fi
 
 # Parse the options
-while getops dra OPTION
+while getopts dra OPTION
 do
    case ${OPTION} in
       d)
@@ -106,10 +106,11 @@ do
          exit 1
        fi
        echo "The account ${USERNAME} was deleted."
-     else
-       chage -E 0 ${USERNAME}
-       # Then the same like above
-     fi
+   else
+      chage -E 0 ${USERNAME}
+      # Then the same like above
+  fi
+ fi
 done
 
 exit 0 
