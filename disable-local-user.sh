@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xve 
 
 ARCHIVE_DIR='/archive'
 
@@ -81,16 +81,15 @@ do
       
     # Archive the user's home directory and move it into the ARCHIVE_DIR.
     HOME_DIR="./home/${USERNAME}"
-    ARCHIVE_FILE="${ARCHIVE_DIR}/${USERNAME}.tgz"
+    ARCHIVE_FILE="${ARCHIVE_DIR}/${USERNAME}.tar.gz"
     if [[ -d "${HOME_DIR}" ]]
     then
       echo "Archiving ${HOME_DIR} to ${ARCHIVE_FILE}"
-      tar -zcf ${ARCHIVE_FILE} ${HOME_DIR} &> /dev/null
-      if[[ "${?}" -ne 0 ]]
-      then
+      tar -zcf ${ARCHIVE_FILE} ${HOME_DIR}  &> /dev/null
+      if [[ "${?}" -ne 0 ]]
+       then
         echo "Could not create ${ARCHIVE_FILE}." >&2
         exit 1
-      fi
      else
        echo "${HOME_DIR} does not exist or is not a directory."
        exit 1
